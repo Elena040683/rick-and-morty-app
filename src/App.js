@@ -1,11 +1,13 @@
 import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap/dist/js/bootstrap.bundle.min.js";
 import { Filters } from "./components/Filters/Filters";
-import { Card } from "./components/Cards/Cards";
+import { Cards } from "./components/Cards/Cards";
 import { useEffect, useState } from "react";
-import { getInfoFromApi } from "./services/rickyandmortyAPI";
 
+import axios from "axios";
 
+const BASE_URL = 'https://rickandmortyapi.com/api';
+axios.defaults.baseURL = BASE_URL;
 
 function App() {
 
@@ -13,12 +15,27 @@ function App() {
   const [fetchData, setFetchData] = useState([]);
   let { info, results } = fetchData;
 
-  useEffect(() => {
-    const data = getInfoFromApi(pageNumber).then(result => result.data.results);
-    console.log(data);
-    setFetchData(data);
-  }, [pageNumber]);
+  let endpoint = 'character';
+  let params = `?page=${pageNumber}`;
+  let url = endpoint + params;
 
+  const getInfoFromApi = async () => {
+    try {
+      const response = await axios.get(url)
+        .then(result => {
+          setFetchData(result.data);
+        })
+
+      if (response.status === 200) return response;
+      if (response.status === 400) throw new Error();
+    } catch (error) {
+      return error.message;
+    }
+  }
+
+  useEffect(() => {
+    getInfoFromApi();
+  }, [url]);
 
   return (
     <div className="App">
@@ -28,8 +45,14 @@ function App() {
 
       <div className="container">
         <div className="row">
-          <div className="col-3"><Filters /></div>
-          <div className="col-8"><Card /></div>
+          <div className="col-3">
+            <Filters />
+          </div>
+          <div className="col-8">
+            <div className="row">
+              <Cards results={results} />
+            </div>
+          </div>
         </div>
       </div>
 
