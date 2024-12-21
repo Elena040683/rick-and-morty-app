@@ -2,32 +2,33 @@ import React from 'react';
 import s from './Cards.module.scss';
 
 export const Cards = ({ results }) => {
-
   let display
   if (results) {
-    display = results.map(({ id, name, image, location, stutus }) => {
+    display = results.map(({ id, name, image, location, status }) => {
       return (
-        <div key={id} className='col-4 mb-4'>
-          <div className={s.cards}>
+        <div key={id} className="col-xl-3 col-lg-4 col-md-6">
+          <div className={`${s.cards} mb-3 d-flex flex-column`}>
             <img src={image} alt="img" className={`${s.img} img-fluid`} />
-            <div className="">content</div>
-            <div className="fs-4 fw-bold mb-4">{name}</div>
-            <div className="">
-              <div className="fs-6">Last Location</div>
-              <div className="fs-5">{location.name}</div>
-            </div>
-
+            <p className="fs-5 fw-medium mb-2">{name}</p>
+            <p className="fs-6">
+              <span className={`${s.status} badge rounded-pill text-bg-success`}> </span>
+              {status}
+            </p>
+            <p className="fs-6">Last Location</p>
+            <p className="fs-6 mb-3">{location.name}</p>
           </div>
-        </div>)
+        </div>
+      )
     })
   } else {
-    display = "No Characters Found"
+    <p>No Characters Found</p>
   }
 
-  console.log(results)
   return (
     <>
       {display}
     </>
   )
 }
+
+

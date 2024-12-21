@@ -40,19 +40,15 @@ function App() {
   return (
     <div className="App">
       <h1 className="text-center my-4 ff">
-        Rick and Morty
+        Rick and Morty application
       </h1>
+      <div className="container text-center">
+        <Filters />
+      </div>
 
-      <div className="container">
+      <div className="container text-center">
         <div className="row">
-          <div className="col-3">
-            <Filters />
-          </div>
-          <div className="col-8">
-            <div className="row">
-              <Cards results={results} />
-            </div>
-          </div>
+          <Cards results={results} />
         </div>
       </div>
 
