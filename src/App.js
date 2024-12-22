@@ -5,6 +5,7 @@ import { Cards } from "./components/Cards/Cards";
 import { useEffect, useState } from "react";
 
 import axios from "axios";
+import Paginanion from "./components/Pagination/Paginanion";
 
 const BASE_URL = 'https://rickandmortyapi.com/api';
 axios.defaults.baseURL = BASE_URL;
@@ -12,6 +13,7 @@ axios.defaults.baseURL = BASE_URL;
 function App() {
 
   const [pageNumber, setPageNumber] = useState(1);
+  console.log(pageNumber)
   const [fetchData, setFetchData] = useState([]);
   let { info, results } = fetchData;
 
@@ -25,7 +27,6 @@ function App() {
         .then(result => {
           setFetchData(result.data);
         })
-
       if (response.status === 200) return response;
       if (response.status === 400) throw new Error();
     } catch (error) {
@@ -34,7 +35,8 @@ function App() {
   }
 
   useEffect(() => {
-    getInfoFromApi();
+    const data = getInfoFromApi()
+    setFetchData(data);
   }, [url]);
 
   return (
@@ -46,14 +48,15 @@ function App() {
         <Filters />
       </div>
 
-      <div className="container text-center">
+      <div className="container-md text-center">
         <div className="row">
           <Cards results={results} />
         </div>
       </div>
 
-    </div>
+      <Paginanion pageNumber={pageNumber} setPageNumber={setPageNumber} info={info} />
 
+    </div>
   );
 }
 
