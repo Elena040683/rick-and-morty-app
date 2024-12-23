@@ -8,12 +8,12 @@ const Paginanion = ({ info, pageNumber, setPageNumber }) => {
         className="pagination justify-content-center gap-4 my-4"
         nextLabel="Next"
         previousLabel="Prev"
-        nextClassName="btn"
-        previousClassName="btn"
-        pageClassName="page-item"
-        pageLinkClassName="page-link"
-        activeClassName="active"
-        forcePage={pageNumber === 1 ? 0 : pageNumber - 1}
+        nextclassNameName="btn"
+        previousclassNameName="btn"
+        pageclassNameName="page-item"
+        pageLinkclassNameName="page-link"
+        activeclassNameName="active"
+        htmlForcePage={pageNumber === 1 ? 0 : pageNumber - 1}
         onPageChange={data => {
           setPageNumber(data.selected + 1);
         }}

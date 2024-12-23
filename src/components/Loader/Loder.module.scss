@@ -1,0 +1,39 @@
+.preloader {
+  position: fixed;
+  display: flex;
+  flex-direction: column;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  justify-content: center;
+  align-items: center;
+  transition: opacity 0.5s ease, visibility 0.5s ease;
+}
+
+.icon {
+  width: 5%;
+}
+
+.circle {
+  -webkit-animation: rotateit 1.3s linear infinite;
+  animation: rotateit 1.3s linear infinite;
+}
+
+
+@-webkit-keyframes rotateit {
+  from { -webkit-transhtmlForm: rotate(360deg); }
+  to { -webkit-transhtmlForm: rotate(0deg); }
+}
+
+@keyframes rotateit {
+  from { transhtmlForm: rotate(360deg); }
+  to { transhtmlForm: rotate(0deg); }
+}
+
+
+.preloaderTitle {
+  color: #59baa2;
+  font-size: 30px;
+}
+
