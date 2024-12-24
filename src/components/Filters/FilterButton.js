@@ -1,14 +1,13 @@
 import React from 'react';
 
-
-const FilterButton = ({ name, index, items, task, setPageNumber }) => {
+const FilterButton = ({ name, index, item, task, setPageNumber }) => {
   return (
     <div>
       <div className="htmlForm-check">
         <input
           onClick={() => {
             setPageNumber(1);
-            task(items);    //update api in App
+            task(item); //update api in App
           }}
           className="htmlForm-check-input"
           type="radio"
@@ -16,7 +15,7 @@ const FilterButton = ({ name, index, items, task, setPageNumber }) => {
           id={`${name}-${index}`}
         />
         <label className="btn btn-outline-primary" htmlFor={`${name}-${index}`}>
-          {items}
+          {item}
         </label>
       </div>
     </div>

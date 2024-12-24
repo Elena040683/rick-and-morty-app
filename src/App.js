@@ -19,9 +19,9 @@ function App() {
   // console.log(pageNumber)
   const [fetchData, setFetchData] = useState([]);
   let { info, results } = fetchData;
-
+  console.log(fetchData);
   let endpoint = 'character';
-  let params = `?page=${pageNumber}&status=${status}`;
+  let params = `?page=${pageNumber}&status=${status}&species=${species}`;
   let url = endpoint + params;
 
   const getInfoFromApi = async () => {
@@ -52,17 +52,18 @@ function App() {
         <Preloader />
       ) : (
         <div>
-          <div className="container text-center">
-            <div className="row">
+          <div className="container-md center-block">
+            <div className="row justify-content-center">
               <Filters
                 setStatus={setStatus}
                 setSpecies={setSpecies}
-                setPageNumber={setPageNumber} />
+                setPageNumber={setPageNumber}
+              />
             </div>
           </div>
 
           <div className="container-md text-center">
-            <div className="row">
+            <div className="row mx-auto">
               <Cards results={results} />
             </div>
           </div>

@@ -2,6 +2,7 @@ import React from 'react';
 import ReactPaginate from 'react-paginate';
 
 const Paginanion = ({ info, pageNumber, setPageNumber }) => {
+  const pageQuantity = Number(info?.pages);
   return (
     <>
       <ReactPaginate
@@ -17,7 +18,7 @@ const Paginanion = ({ info, pageNumber, setPageNumber }) => {
         onPageChange={data => {
           setPageNumber(data.selected + 1);
         }}
-        pageCount={info?.pages}
+        pageCount={pageQuantity}
       />
     </>
   );

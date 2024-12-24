@@ -1,35 +1,42 @@
-import React from 'react'
-import FilterButton from '../FilterButton'
+import React from 'react';
+import FilterButton from '../FilterButton';
 
-const Species = () => {
-  let species = ["Alien", "Human"]
+const Species = ({ setSpecies, setPageNumber }) => {
+  let species = ['Alien', 'Human'];
   return (
     <div className="accordion-item">
-      <h2 className="accordion-header">
+      <h2 className="accordion-header" id="headingTwo">
         <button
           className="accordion-button"
           type="button"
           data-bs-toggle="collapse"
-          data-bs-target="#collapseOne"
+          data-bs-target="#collapseTwo"
           aria-expanded="true"
-          aria-controls="collapseOne"
+          aria-controls="collapseTwo"
         >
           Species
         </button>
       </h2>
       <div
-        id="collapseOne"
-        className="accordion-collapse collapse show"
-        data-bs-parent="#accordionExample"
+        id="collapseTwo"
+        className="accordion-collapse"
+      // data-bs-parent="#accordionExample"
       >
-        <div className="accordion-body d-flex flex-wrap">
-          {species.map((items, index) => (
-            <FilterButton key={index} name="species" index={index} items={items} />
+        <div className="accordion-body d-flex flex-wrap gap-3">
+          {species.map((item, index) => (
+            <FilterButton
+              key={index}
+              name="species"
+              index={index}
+              item={item}
+              task={setSpecies}
+              setPageNumber={setPageNumber}
+            />
           ))}
         </div>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default Species
+export default Species;

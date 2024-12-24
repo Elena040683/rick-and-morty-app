@@ -5,32 +5,32 @@ const Status = ({ setStatus, setPageNumber }) => {
   let status = ['Alive', 'Dead', 'Unknown'];
   return (
     <div className="accordion-item">
-      <h2 className="accordion-header">
+      <h2 className="accordion-header" id="headingOne">
         <button
-          className="accordion-button collapsed"
+          className="accordion-button"
           type="button"
           data-bs-toggle="collapse"
-          data-bs-target="#collapseTwo"
-          aria-expanded="false"
-          aria-controls="collapseTwo"
+          data-bs-target="#collapseOne"
+          aria-expanded="true"
+          aria-controls="collapseOne"
         >
           Status
         </button>
       </h2>
       <div
-        id="collapseTwo"
-        className="accordion-collapse collapse show"
-        data-bs-parent="#accordionExample"
+        id="collapseOne"
+        className="accordion-collapse"
+      // data-bs-parent="#accordionExample"
       >
-        <div className="accordion-body d-flex flex-wrap">
-          {status.map((items, index) => (
+        <div className="accordion-body d-flex flex-wrap gap-3">
+          {status.map((item, index) => (
             <FilterButton
-              task={setStatus}
-              setPageNumber={setPageNumber}
               key={index}
               name="status"
               index={index}
-              items={items}
+              item={item}
+              task={setStatus}
+              setPageNumber={setPageNumber}
             />
           ))}
         </div>
