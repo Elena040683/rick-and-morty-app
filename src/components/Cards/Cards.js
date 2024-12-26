@@ -1,13 +1,21 @@
 import React from 'react';
 import s from './Cards.module.scss';
+import { NavLink, Link } from 'react-router-dom';
 
 export const Cards = ({ results }) => {
   let display;
   if (results) {
     display = results.map(({ id, name, image, location, status, species }) => {
       return (
-        <div key={id} className="col-xl-2 col-lg-3 col-md-4">
-          <div className={`${s.cards} mb-3 d-flex flex-column`}>
+        < div key={id} className="col-xl-2 col-lg-3 col-md-3" >
+          <NavLink to={{
+            pathname: `/details/${id}`,
+            state: {
+              from: location,
+              label: `bak to home`
+            }
+          }}
+            className={`${s.cards} mb-3 d-flex flex-column`}>
             <img src={image} alt="img" className={`${s.img} img-fluid`} />
             <p className="fs-5 fw-medium mb-1">{name}</p>
             {(() => {
@@ -49,7 +57,7 @@ export const Cards = ({ results }) => {
             <p className="fs-6">{species}</p>
             <p className="fs-6">Last Location</p>
             <p className="fs-6 mb-3">{location.name}</p>
-          </div>
+          </NavLink>
         </div>
       );
     });

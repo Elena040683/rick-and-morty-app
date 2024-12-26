@@ -11,7 +11,7 @@ export const Filters = ({ setStatus, setPageNumber, setSpecies }) => {
   }
   return (
     <div className="col-5 mb-3">
-      <div className="text-center fw-bold fs-4 mb-4">Filter</div>
+      <div className="text-center fw-bold fs-4">Filter</div>
       <div
         onClick={clear}
         style={{ cursor: 'pointer' }}

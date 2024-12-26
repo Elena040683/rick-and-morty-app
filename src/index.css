@@ -13,11 +13,19 @@ code {
     monospace;
 }
 
-input[type = "radio"] {
+input[type='radio'] {
   display: none;
 }
 
 input:checked + label {
-background-color: #0b5ed7;
-color: #fff;
+  background-color: #0b5ed7;
+  color: #fff;
+}
+
+button[aria-expanded='false'] > .close {
+  display: none;
+}
+
+button[aria-expanded='true'] > .open {
+  display: none;
 }
