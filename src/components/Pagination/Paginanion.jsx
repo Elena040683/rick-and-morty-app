@@ -1,12 +1,13 @@
 import React from 'react';
 import ReactPaginate from 'react-paginate';
+import s from './Pagination.module.scss';
 
 const Paginanion = ({ info, pageNumber, setPageNumber }) => {
   const pageQuantity = Number(info?.pages);
   return (
     <>
       <ReactPaginate
-        className="pagination justify-content-center gap-4 my-4"
+        className={`${s.pag} pagination justify-content-center gap-4 my-4`}
         nextLabel="Next"
         previousLabel="Prev"
         nextclassNameName="btn"

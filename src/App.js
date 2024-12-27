@@ -18,16 +18,17 @@ const App = () => {
   return (
     <>
       <Router>
-
+        <Navbar />
         <Suspense fallback={<Loader />}>
           <Routes>
-            <Route path="/" element={<HomePage />} />
-            <Route path="/details/:id" element={<DetailsPage />} />
-            <Route path="/settings" element={<SettingsPage />} />
+            <Route path="/">
+              <Route index element={<HomePage />} />
+              <Route path="details/:id" element={<DetailsPage />} />
+              <Route path="settings" element={<SettingsPage />} />
+            </Route>
             <Route path="*" element={<NotFoundPage />} />
           </Routes>
         </Suspense>
-        <Navbar />
       </Router>
     </>
   );
