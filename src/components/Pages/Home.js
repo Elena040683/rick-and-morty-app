@@ -18,8 +18,12 @@ const Home = () => {
 
   useEffect(() => {
     fetchAllCharactersApi(pageNumber, status, species)
-      .then(res => setFetchData(res))
+      .then(res => {
+        setIsLoading(true);
+        setFetchData(res);
+      })
       .catch(error => setError(error.message))
+      .finally(() => setIsLoading(false));
   }, [pageNumber, status, species]);
 
   return (
@@ -54,6 +58,6 @@ const Home = () => {
       )}
     </>
   );
-}
+};
 
 export default Home;

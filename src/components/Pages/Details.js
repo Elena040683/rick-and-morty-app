@@ -1,52 +1,64 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { fetchCardApi } from '../../services/fetchDataApi';
 
 const Details = () => {
-
   const [characterDetails, setCharacterDetails] = useState({});
+  const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
 
-  let { name, status, species, type, gender, location, image } = characterDetails;
+  let { name, status, species, type, gender, location, image } =
+    characterDetails;
 
   const navigate = useNavigate();
-  const params = useParams()
+  const params = useParams();
 
   useEffect(() => {
     fetchCardApi(params.id)
-      .then(res => setCharacterDetails(res))
+      .then(res => {
+        setIsLoading(true);
+        setCharacterDetails(res);
+      })
       .catch(error => setError(error.message))
+      .finally(() => setIsLoading(false));
   }, [params.id]);
 
   const handleClick = () => {
     navigate('/');
-  }
+  };
+
+  type = characterDetails.type ? characterDetails.type : 'No type';
 
   return (
-    <div className="container">
-      <header>
-        <button
-          type="button"
-          className="btn btn-primary my-4"
-          onClick={handleClick}
-        >
-          back
-        </button>
-        <h2> Character's name: {name}</h2>
-      </header>
-
-      <main>
-        <img src={image} alt="photo" />
-        <div className="fs-6">
-          <p className="fs-6">Status: {status}</p>
-          <p className="fs-6">Type: {type}</p>
-          <p className="fs-6">Species: {species}</p>
-          <p className="fs-6">Gender: {gender}</p>
-          <p className="fs-6">Location: {location?.name}</p>
+    <>
+      {characterDetails ? (
+        <div className="container">
+          <header>
+            <button
+              type="button"
+              className="btn btn-primary my-4"
+              onClick={handleClick}
+            >
+              back
+            </button>
+            <h2> Character's name: {name}</h2>
+          </header>
+          <main>
+            <img src={image} alt="photo" />
+            <div className="fs-6">
+              <p className="fs-6">Status: {status}</p>
+              <p className="fs-6">Type: {type}</p>
+              <p className="fs-6">Species: {species}</p>
+              <p className="fs-6">Gender: {gender}</p>
+              <p className="fs-6">Location: {location?.name}</p>
+            </div>
+          </main>
         </div>
-      </main>
-    </div>
+      ) : (
+        <p>No match found</p>
+      )}
+    </>
   );
-}
+};
 
-export default Details
+export default Details;
