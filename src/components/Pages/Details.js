@@ -1,70 +1,68 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { fetchCardApi } from '../../services/fetchDataApi';
+import { CharacterDetailsView } from './CharacterDetailsView';
+import ErrorView from './ErrorView';
+import Loader from '../Loader/Loader';
+
+const Status = {
+  IDLE: 'idle',
+  PENDING: 'pending',
+  RESOLVED: 'resolved',
+  REJECTED: 'rejected',
+};
 
 const Details = () => {
   const [characterDetails, setCharacterDetails] = useState({});
-  const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
-
-  let { name, status, species, type, gender, origin, location, image } =
-    characterDetails;
+  const [status, setStatus] = useState(null);
 
   const navigate = useNavigate();
   const params = useParams();
 
   useEffect(() => {
+    if (!characterDetails) {
+      // Первый рендер, это пустой объект, не делаем fetch
+      return;
+    }
+
+    setStatus(Status.PENDING);
+
     fetchCardApi(params.id)
       .then(res => {
-        setIsLoading(true);
         setCharacterDetails(res);
+        setStatus(Status.RESOLVED);
       })
-      .catch(error => setError(error.message))
-      .finally(() => setIsLoading(false));
+      .catch(error => {
+        setError(error.message);
+        setStatus(Status.REJECTED);
+      });
   }, [params.id]);
 
   const handleClick = () => {
     navigate('/');
   };
 
-  return (
-    <>
-      {characterDetails ? (
-        <div className="container d-flex justify-content-center">
-          <div className="d-flex flex-column gap-4">
-            <header>
-              <button
-                type="button"
-                className="btn btn-primary my-4"
-                onClick={handleClick}
-              >
-                back
-              </button>
-              <h2 className="text-center text-primery">
-                Character's name: {name}
-              </h2>
-            </header>
-            <main className="d-flex justify-content-center flex-column">
-              <img src={image} alt="photo" />
-              <div className="fs-6">
-                <p className="text-center fs-6">Status: {status}</p>
-                <p className="text-center fs-6">
-                  Type:
-                  {type === '' ? ' Unknown' : type}
-                </p>
-                <p className="text-center fs-6">Species: {species}</p>
-                <p className="text-center fs-6">Gender: {gender}</p>
-                <p className="text-center fs-6">Origin: {origin?.name}</p>
-                <p className="text-center fs-6">Location: {location?.name}</p>
-              </div>
-            </main>
-          </div>
-        </div>
-      ) : (
-        <p>No match found</p>
-      )}
-    </>
-  );
+  if (status === Status.IDLE) {
+    return <div>Go ahead...</div>;
+  }
+
+  if (status === Status.PENDING) {
+    return <Loader />;
+  }
+
+  if (status === Status.REJECTED) {
+    return <ErrorView message={error.message} />;
+  }
+
+  if (status === Status.RESOLVED) {
+    return (
+      <CharacterDetailsView
+        characterDetails={characterDetails}
+        handleClick={handleClick}
+      />
+    );
+  }
 };
 
 export default Details;

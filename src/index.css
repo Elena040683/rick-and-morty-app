@@ -1,4 +1,5 @@
 body {
+  font-family: 'Ubuntu';
   margin: 0;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -18,13 +19,15 @@ body.dark {
   --bs-border-color-translucent: rgba(255, 255, 255, 0.15);
 }
 
-.ff {
-  font-family: 'Ubuntu';
-}
-
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
+}
+
+img {
+  display: block;
+  max-width: 100%;
+  height: auto;
 }
 
 input[type='radio'] {
@@ -42,4 +45,18 @@ button[aria-expanded='false'] > .close {
 
 button[aria-expanded='true'] > .open {
   display: none;
+}
+
+.icon-spin {
+  margin-right: 10px;
+  animation: icon-spin 2s infinite linear;
+}
+
+@keyframes icon-spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(359deg);
+  }
 }
