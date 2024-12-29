@@ -3,6 +3,7 @@ import { Cards } from '../Cards/Cards';
 import { useEffect, useState } from 'react';
 import Paginanion from '../Pagination/Paginanion';
 import Loader from '../Loader/Loader';
+
 //import { fetchAllCharactersApi } from '../../services/fetchDataApi';
 import { useDispatch, useSelector } from 'react-redux';
 import { getData } from '../../redux/characters/operations';

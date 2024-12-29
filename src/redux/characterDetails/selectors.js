@@ -1,8 +1,7 @@
-export const characterDetailsData = state =>
-  state.singleCharacterDetailsReduser.characterDetails;
+export const characterDetailsData = state => state.details.characterDetails;
 
 export const characterDetailsLoading = state =>
-  state.singleCharacterDetailsReduser.loading;
+  state.details.characterDetailsLoading;
 
 export const characterDetailsError = state =>
-  state.singleCharacterDetailsReduser.error;
+  state.details.characterDetailsError;
