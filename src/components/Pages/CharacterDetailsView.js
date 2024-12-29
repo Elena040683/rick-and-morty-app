@@ -1,6 +1,5 @@
-export const CharacterDetailsView = ({ characterDetails, handleClick }) => {
-  const { name, status, species, type, gender, origin, location, image } =
-    characterDetails;
+export const CharacterDetailsView = ({ data, handleClick }) => {
+  const { name, status, species, type, gender, origin, location, image } = data;
   return (
     <div className="container d-flex justify-content-center">
       <div className="d-flex flex-column gap-2">

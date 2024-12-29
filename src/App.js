@@ -5,21 +5,23 @@ import React, { Suspense } from 'react';
 import Navbar from './components/Navbar/Navbar';
 import Loader from './components/Loader/Loader';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { CheckConnection } from './components/CheckConnection/CheckConnection';
 
 const App = () => {
   return (
-    <>
-      <Router>
-        <Navbar />
-        <Suspense fallback={<Loader />}>
-          <Routes>
-            {router.map((route, index) => {
-              console.log(route);
-              const { path, element } = route;
-              return <Route key={index} path={path} element={element} />;
-            })}
-          </Routes>
-          {/* <Routes>
+    <CheckConnection>
+      <>
+        <Router>
+          <Navbar />
+          <Suspense fallback={<Loader />}>
+            <Routes>
+              {router.map((route, index) => {
+                console.log(route);
+                const { path, element } = route;
+                return <Route key={index} path={path} element={element} />;
+              })}
+            </Routes>
+            {/* <Routes>
             <Route path="/">
               <Route index element={<HomePage />} />
               <Route path="details/:id" element={<DetailsPage />} />
@@ -27,9 +29,10 @@ const App = () => {
             </Route>
             <Route path="*" element={<NotFoundPage />} />
           </Routes> */}
-        </Suspense>
-      </Router>
-    </>
+          </Suspense>
+        </Router>
+      </>
+    </CheckConnection>
   );
 };
 

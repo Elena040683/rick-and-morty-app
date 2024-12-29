@@ -1,6 +1,6 @@
 import { Filters } from '../Filters/Filters';
 import { Cards } from '../Cards/Cards';
-import { use, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import Paginanion from '../Pagination/Paginanion';
 import Loader from '../Loader/Loader';
 //import { fetchAllCharactersApi } from '../../services/fetchDataApi';
@@ -9,12 +9,13 @@ import { getData } from '../../redux/characters/operations';
 import {
   charactersInfo,
   charactersResults,
+  loadingAllCharacters,
 } from '../../redux/characters/selectors';
 
 const Home = () => {
   const [pageNumber, setPageNumber] = useState(1);
-  const [isLoading, setIsLoading] = useState(false);
-  const [error, setError] = useState(null);
+  // const [isLoading, setIsLoading] = useState(false);
+  // const [error, setError] = useState(null);
   const [status, setStatus] = useState('');
   const [species, setSpecies] = useState('');
 
@@ -23,6 +24,7 @@ const Home = () => {
 
   const info = useSelector(charactersInfo);
   const results = useSelector(charactersResults);
+  const isLoading = useSelector(loadingAllCharacters);
 
   const dispatch = useDispatch();
 
@@ -36,7 +38,7 @@ const Home = () => {
     //   })
     //   .catch(error => setError(error.message))
     //   .finally(() => setIsLoading(false));
-  }, [pageNumber, status, species]);
+  }, [pageNumber, status, species, dispatch]);
 
   return (
     <>

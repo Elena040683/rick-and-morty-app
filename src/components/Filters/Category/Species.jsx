@@ -20,7 +20,6 @@ const Species = ({ setSpecies, setPageNumber }) => {
       <div
         id="collapseTwo"
         className="accordion-collapse"
-      // data-bs-parent="#accordionExample"
       >
         <div className="accordion-body d-flex flex-wrap gap-3">
           {species.map((item, index) => (

@@ -4,64 +4,68 @@ import { fetchCardApi } from '../../services/fetchDataApi';
 import { CharacterDetailsView } from './CharacterDetailsView';
 import ErrorView from './ErrorView';
 import Loader from '../Loader/Loader';
+import { getSingleCharacterDetails } from '../../redux/characterDetails/operations';
+import { useDispatch, useSelector } from 'react-redux';
+import {
+  characterDetailsData,
+  characterDetailsLoading,
+  characterDetailsError,
+} from '../../redux/characterDetails/selectors';
 
-const Status = {
-  IDLE: 'idle',
-  PENDING: 'pending',
-  RESOLVED: 'resolved',
-  REJECTED: 'rejected',
-};
+// const Status = {
+//   IDLE: 'idle',
+//   PENDING: 'pending',
+//   RESOLVED: 'resolved',
+//   REJECTED: 'rejected',
+// };
 
 const Details = () => {
-  const [characterDetails, setCharacterDetails] = useState({});
-  const [error, setError] = useState(null);
-  const [status, setStatus] = useState(null);
+  // const [characterDetails, setCharacterDetails] = useState({});
+  // const [error, setError] = useState(null);
+  // const [status, setStatus] = useState(null);
 
   const navigate = useNavigate();
   const params = useParams();
+  const dispatch = useDispatch();
+
+  const details = useSelector(characterDetailsData);
+  const isLoading = useSelector(characterDetailsLoading);
+  const error = useSelector(characterDetailsError);
 
   useEffect(() => {
-    if (!characterDetails) {
-      // Первый рендер, это пустой объект, не делаем fetch
-      return;
-    }
+    dispatch(getSingleCharacterDetails(params.id));
+    // if (!characterDetails) {
+    //   // Первый рендер, это пустой объект, не делаем fetch
+    //   return;
+    // }
 
-    setStatus(Status.PENDING);
+    // setStatus(Status.PENDING);
 
-    fetchCardApi(params.id)
-      .then(res => {
-        setCharacterDetails(res);
-        setStatus(Status.RESOLVED);
-      })
-      .catch(error => {
-        setError(error.message);
-        setStatus(Status.REJECTED);
-      });
-  }, [params.id]);
+    // fetchCardApi(params.id)
+    //   .then(res => {
+    //     setCharacterDetails(res);
+    //     setStatus(Status.RESOLVED);
+    //   })
+    //   .catch(error => {
+    //     setError(error.message);
+    //     setStatus(Status.REJECTED);
+    //   });
+  }, [params.id, dispatch]);
 
   const handleClick = () => {
     navigate('/');
   };
 
-  if (status === Status.IDLE) {
-    return <div>Go ahead...</div>;
-  }
-
-  if (status === Status.PENDING) {
+  if (isLoading) {
     return <Loader />;
   }
 
-  if (status === Status.REJECTED) {
+  if (error) {
     return <ErrorView message={error.message} />;
   }
 
-  if (status === Status.RESOLVED) {
-    return (
-      <CharacterDetailsView
-        characterDetails={characterDetails}
-        handleClick={handleClick}
-      />
-    );
+  if (details) {
+    return <CharacterDetailsView data={details} handleClick={handleClick} />;
   }
 };
 

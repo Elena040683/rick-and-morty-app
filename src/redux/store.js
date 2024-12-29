@@ -1,11 +1,11 @@
 import { configureStore } from '@reduxjs/toolkit';
 import { combineReducers } from 'redux';
-import { characters, loading, error } from './characters/reducers';
+import { allCharactersReducer } from './characters/reducers';
+import { singleCharacterDetailsReduser } from './characterDetails/redusers';
 
 const rootReducer = combineReducers({
-  characters,
-  loading,
-  error,
+  allCharactersReducer,
+  singleCharacterDetailsReduser,
 });
 
 export const store = configureStore({

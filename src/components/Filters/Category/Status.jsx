@@ -20,7 +20,6 @@ const Status = ({ setStatus, setPageNumber }) => {
       <div
         id="collapseOne"
         className="accordion-collapse"
-      // data-bs-parent="#accordionExample"
       >
         <div className="accordion-body d-flex flex-wrap gap-3">
           {status.map((item, index) => (
