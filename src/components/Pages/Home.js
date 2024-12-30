@@ -26,6 +26,8 @@ const Home = () => {
   const results = useSelector(charactersResults);
   const isLoading = useSelector(loadingAllCharacters);
 
+  const totalPage = info?.pages;
+
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -70,7 +72,7 @@ const Home = () => {
           <Paginate
             onPageChange={hadleChangePage}
             currentPage={pageNumber}
-            numberOfPages={info?.pages}
+            numberOfPages={totalPage}
           />
         </div>
       )}
