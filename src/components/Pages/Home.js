@@ -1,9 +1,8 @@
 import { Filters } from '../Filters/Filters';
 import { Cards } from '../Cards/Cards';
-import { useEffect, useState } from 'react';
-import Paginanion from '../Pagination/Paginanion';
+import { useCallback, useEffect, useState } from 'react';
 import Loader from '../Loader/Loader';
-
+import Paginate from '../Pagination/Paginate';
 //import { fetchAllCharactersApi } from '../../services/fetchDataApi';
 import { useDispatch, useSelector } from 'react-redux';
 import { getData } from '../../redux/characters/operations';
@@ -20,7 +19,7 @@ const Home = () => {
   const [status, setStatus] = useState('');
   const [species, setSpecies] = useState('');
 
-  //const [fetchData, setFetchData] = useState({});
+  //const [fetchData, setFetchData] = useState({}); //перенесено в redux
   //let { info, results } = fetchData;
 
   const info = useSelector(charactersInfo);
@@ -40,6 +39,13 @@ const Home = () => {
     //   .catch(error => setError(error.message))
     //   .finally(() => setIsLoading(false));
   }, [pageNumber, status, species, dispatch]);
+
+  const hadleChangePage = useCallback(
+    pageNumber => {
+      setPageNumber(pageNumber);
+    },
+    [pageNumber],
+  );
 
   return (
     <>
@@ -64,10 +70,10 @@ const Home = () => {
             </div>
           </div>
 
-          <Paginanion
-            pageNumber={pageNumber}
-            setPageNumber={setPageNumber}
-            info={info}
+          <Paginate
+            onPageChange={hadleChangePage}
+            currentPage={pageNumber}
+            numberOfPages={info.pages}
           />
         </div>
       )}

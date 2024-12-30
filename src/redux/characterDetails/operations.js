@@ -21,7 +21,8 @@ export const getSingleCharacterDetails = id => {
         dispatch(getCharacterDetailsFailuer('No data recieved'));
       }
     } catch (error) {
-      dispatch(getCharacterDetailsFailuer('No data received'));
+      alert('Sorry, something went wrong.');
+      dispatch(getCharacterDetailsFailuer(error.message));
     }
   };
 };

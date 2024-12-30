@@ -23,6 +23,7 @@ export const getData = (pageNumber, status, species) => {
         dispatch(getCharactersFailure('No data received'));
       }
     } catch (error) {
+      alert('Sorry, something went wrong.');
       dispatch(getCharactersFailure(error.message));
     }
   };

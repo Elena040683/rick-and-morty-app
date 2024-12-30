@@ -1,4 +1,4 @@
-import React, { lazy} from 'react';
+import { lazy } from 'react';
 
 const HomePage = lazy(() => import('../components/Pages/Home'));
 const DetailsPage = lazy(() => import('../components/Pages/Details'));
@@ -8,18 +8,18 @@ const ErrorViewPage = lazy(() => import('../components/Pages/ErrorView'));
 export const router = [
   {
     path: '/',
-    element: <HomePage/>,
+    element: <HomePage />,
   },
   {
     path: '/details/:id',
-    element: <DetailsPage/>
+    element: <DetailsPage />,
   },
   {
     path: '/settings',
-    element: <SettingsPage/>
+    element: <SettingsPage />,
   },
   {
     path: '*',
-    element: <ErrorViewPage message={"Press nav tab :)"}/>
-  }
-]
+    element: <ErrorViewPage message={'Press nav tab :)'} />,
+  },
+];

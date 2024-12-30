@@ -6,11 +6,13 @@ import Navbar from './components/Navbar/Navbar';
 import Loader from './components/Loader/Loader';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { CheckConnection } from './components/CheckConnection/CheckConnection';
+import Navigator from './routes/routerMob';
 
 const App = () => {
   return (
     <CheckConnection>
       <>
+        {/* <Navigator /> */}
         <Router>
           <Navbar />
           <Suspense fallback={<Loader />}>
@@ -21,14 +23,6 @@ const App = () => {
                 return <Route key={index} path={path} element={element} />;
               })}
             </Routes>
-            {/* <Routes>
-            <Route path="/">
-              <Route index element={<HomePage />} />
-              <Route path="details/:id" element={<DetailsPage />} />
-              <Route path="settings" element={<SettingsPage />} />
-            </Route>
-            <Route path="*" element={<NotFoundPage />} />
-          </Routes> */}
           </Suspense>
         </Router>
       </>
