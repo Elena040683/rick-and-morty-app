@@ -14,7 +14,7 @@ export const CharacterDetailsView = ({ data, handleClick }) => {
           <h2 className="text-center fs-3">Character's name: {name}</h2>
         </header>
         <main className="d-flex justify-content-center flex-column w-50">
-          <img src={image} alt="photo" />
+          <img src={image} alt="character" />
           <div className="fs-6">
             <p className="text-center fs-6">Status: {status}</p>
             <p className="text-center fs-6">

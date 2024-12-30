@@ -3,7 +3,7 @@ import { lazy } from 'react';
 const HomePage = lazy(() => import('../components/Pages/Home'));
 const DetailsPage = lazy(() => import('../components/Pages/Details'));
 const SettingsPage = lazy(() => import('../components/Pages/Settings'));
-const ErrorViewPage = lazy(() => import('../components/Pages/ErrorView'));
+const StartViewPage = lazy(() => import('../components/Pages/StartView'));
 
 export const router = [
   {
@@ -20,6 +20,6 @@ export const router = [
   },
   {
     path: '*',
-    element: <ErrorViewPage message={'Press nav tab :)'} />,
+    element: <StartViewPage message={'Press nav tab :)'} />,
   },
 ];

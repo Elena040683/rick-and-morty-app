@@ -40,12 +40,9 @@ const Home = () => {
     //   .finally(() => setIsLoading(false));
   }, [pageNumber, status, species, dispatch]);
 
-  const hadleChangePage = useCallback(
-    pageNumber => {
-      setPageNumber(pageNumber);
-    },
-    [pageNumber],
-  );
+  const hadleChangePage = useCallback(pageNumber => {
+    setPageNumber(pageNumber);
+  }, []);
 
   return (
     <>

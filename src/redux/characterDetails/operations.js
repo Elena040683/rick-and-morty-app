@@ -11,7 +11,7 @@ axios.defaults.baseURL = BASE_URL;
 
 export const getSingleCharacterDetails = id => {
   return async dispatch => {
-    dispatch(getCharacterDetailsRequest);
+    dispatch(getCharacterDetailsRequest());
     try {
       const response = await axios.get(`/character/${id}`);
       if (response.data) {

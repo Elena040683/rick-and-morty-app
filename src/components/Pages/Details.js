@@ -1,8 +1,7 @@
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
-import { fetchCardApi } from '../../services/fetchDataApi';
+//import { fetchCardApi } from '../../services/fetchDataApi';
 import { CharacterDetailsView } from './CharacterDetailsView';
-import ErrorView from './ErrorView';
 import Loader from '../Loader/Loader';
 import { getSingleCharacterDetails } from '../../redux/characterDetails/operations';
 import { useDispatch, useSelector } from 'react-redux';
@@ -61,7 +60,7 @@ const Details = () => {
   }
 
   if (error) {
-    return <ErrorView message={error.message} />;
+    return error.message;
   }
 
   if (details) {
