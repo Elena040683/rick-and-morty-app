@@ -70,7 +70,7 @@ const Home = () => {
           <Paginate
             onPageChange={hadleChangePage}
             currentPage={pageNumber}
-            numberOfPages={info.pages}
+            numberOfPages={info?.pages}
           />
         </div>
       )}
