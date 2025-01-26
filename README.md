@@ -63,6 +63,25 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/a
 
 ### Deployment
 
+DB
+Redis
+Backend
+DB
+Redis
+Backend
+Client
+email, tel, password
+Do we have cache?
+No
+email, tel, password
+hash
+Please cach this data
+caching ...
+Done
+Set-cookie
+Client
+
+
 This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
 
 ### `npm run build` fails to minify
